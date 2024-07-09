@@ -7,17 +7,20 @@
     <style>
         body {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             align-items: center;
             height: 100vh;
             background-color: #f0f0f0;
         }
         .container {
-            position: relative;
+            margin: 10px;
         }
         .image {
             cursor: pointer;
             transition: transform 0.3s;
+            max-width: 200px;
+            max-height: 200px;
         }
         .overlay {
             position: fixed;
@@ -38,17 +41,27 @@
     </style>
 </head>
 <body>
+    <!-- Container de imagens -->
     <div class="container">
-        <img src="caminho/para/sua/imagem.jpg" alt="Imagem" class="image" id="thumbnail">
+        <img src="https://drive.google.com/uc?export=view&id=ID_DA_IMAGEM1" alt="Imagem Produto 1" class="image" data-large="https://drive.google.com/uc?export=view&id=ID_DA_IMAGEM1">
     </div>
+    <div class="container">
+        <img src="https://drive.google.com/uc?export=view&id=ID_DA_IMAGEM2" alt="Imagem Produto 2" class="image" data-large="https://drive.google.com/uc?export=view&id=ID_DA_IMAGEM2">
+    </div>
+    <!-- Adicione mais imagens conforme necessário -->
 
+    <!-- Overlay para imagem ampliada -->
     <div class="overlay" id="overlay">
-        <img src="caminho/para/sua/imagem.jpg" alt="Imagem Ampliada" id="largeImage">
+        <img id="largeImage" alt="Imagem Ampliada">
     </div>
 
     <script>
-        document.getElementById('thumbnail').addEventListener('click', function () {
-            document.getElementById('overlay').style.display = 'flex';
+        document.querySelectorAll('.image').forEach(image => {
+            image.addEventListener('click', function () {
+                const largeImageSrc = this.getAttribute('data-large');
+                document.getElementById('largeImage').src = largeImageSrc;
+                document.getElementById('overlay').style.display = 'flex';
+            });
         });
 
         document.getElementById('overlay').addEventListener('click', function () {
